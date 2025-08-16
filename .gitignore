@@ -1,0 +1,48 @@
+# Генерируемые файлы сборки
+/build/
+/build-*/
+
+# CMake
+CMakeLists.txt.user
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+*.cmake
+*.cbp
+
+# Qt Creator
+*.pro.user
+*.qbs.user
+*.qmlproject.user
+*.autosave
+
+# Qt uic/moc/rcc
+*.moc
+moc_*.cpp
+qrc_*.cpp
+ui_*.h
+
+# Компиляция
+*.o
+*.obj
+*.a
+*.so
+*.so.*
+*.dll
+*.dylib
+*.exe
+*.app
+
+# Логи и временные файлы
+*.log
+*.tmp
+*.swp
+*.swo
+*.DS_Store
+Thumbs.db
+
+# Системные
+.idea/
+.vscode/
+*.kate-swp
