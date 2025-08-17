@@ -113,7 +113,7 @@ border: 2px solid #1e2134;</string>
             <number>5</number>
            </property>
            <item>
-            <widget class="Line" name="line">
+            <widget class="Line" name="borderline_1">
              <property name="minimumSize">
               <size>
                <width>500</width>
@@ -145,27 +145,42 @@ border: 2px solid #1e2134;</string>
              <property name="sizeHint" stdset="0">
               <size>
                <width>20</width>
-               <height>15</height>
+               <height>5</height>
               </size>
              </property>
             </spacer>
            </item>
            <item>
-            <widget class="QScrollBar" name="verticalScrollBar">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
+            <widget class="QScrollArea" name="notes_scroll_area">
              <property name="styleSheet">
-              <string notr="true">background-color: #3f4156;
-border-radius: 13px;                     /* &lt;----  20px  */ 
-border: 2px solid #1e2134;</string>
+              <string notr="true">QScrollBar:vertical {
+		background-color: #3f4156;
+}</string>
              </property>
-             <property name="orientation">
-              <enum>Qt::Orientation::Vertical</enum>
+             <property name="verticalScrollBarPolicy">
+              <enum>Qt::ScrollBarPolicy::ScrollBarAsNeeded</enum>
              </property>
+             <property name="horizontalScrollBarPolicy">
+              <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
+             </property>
+             <property name="widgetResizable">
+              <bool>true</bool>
+             </property>
+             <widget class="QWidget" name="notes_scroll_area_layout">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>134</width>
+                <height>497</height>
+               </rect>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_3">
+               <item>
+                <layout class="QVBoxLayout" name="notes_container"/>
+               </item>
+              </layout>
+             </widget>
             </widget>
            </item>
           </layout>
@@ -294,7 +309,7 @@ border: 2px solid #1e2134;</string>
           </property>
          </widget>
         </widget>
-        <widget class="Line" name="line_2">
+        <widget class="Line" name="border_line2">
          <property name="geometry">
           <rect>
            <x>0</x>
