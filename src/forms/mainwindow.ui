@@ -137,7 +137,7 @@
           <enum>Qt::Orientation::Horizontal</enum>
          </property>
         </widget>
-        <widget class="QPushButton" name="pushButton">
+        <widget class="QPushButton" name="new_note_button">
          <property name="geometry">
           <rect>
            <x>9</x>
@@ -148,10 +148,11 @@
          </property>
          <property name="font">
           <font>
-           <family>Verdana</family>
+           <family>Arial</family>
            <pointsize>14</pointsize>
            <italic>false</italic>
-           <bold>false</bold>
+           <bold>true</bold>
+           <underline>false</underline>
           </font>
          </property>
          <property name="cursor">
@@ -159,7 +160,7 @@
          </property>
          <property name="styleSheet">
           <string notr="true">background-color: #3f4156;
-border-radius: 20px;                     /* &lt;----  20px  */ 
+border-radius: 13px;                     /* &lt;----  20px  */ 
 border: 2px solid #1e2134;</string>
          </property>
          <property name="text">
@@ -294,26 +295,7 @@ border: 2px solid #1e2134;</string>
      </layout>
     </item>
    </layout>
-   <zorder>listView</zorder>
-   <zorder>pushButton</zorder>
-   <zorder>pushButton_2</zorder>
-   <zorder>verticalSpacer</zorder>
-   <zorder>horizontalSpacer</zorder>
-   <zorder>horizontalSpacer</zorder>
-   <zorder>pushButton_2</zorder>
-   <zorder>pushButton_3</zorder>
-   <zorder>pushButton_4</zorder>
-   <zorder>line</zorder>
-   <zorder>widget</zorder>
-   <zorder>widget_2</zorder>
-   <zorder>widget</zorder>
-   <zorder>widget_2</zorder>
-   <zorder>horizontalSpacer</zorder>
    <zorder></zorder>
-   <zorder>widget</zorder>
-   <zorder>widget</zorder>
-   <zorder>widget_2</zorder>
-   <zorder>horizontalSpacer</zorder>
   </widget>
  </widget>
  <resources/>
