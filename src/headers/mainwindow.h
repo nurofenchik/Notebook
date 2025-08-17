@@ -15,7 +15,7 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = nullptr);
-    void add_note(const QString& short_txt , const QString& full_txt);
+    void add_note(const QString& short_txt , const QString& full_txt , QWidget* add_window);
     ~MainWindow();
 
 private slots:

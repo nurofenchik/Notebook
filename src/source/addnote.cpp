@@ -18,6 +18,6 @@ void addnote::on_save_note_button_clicked()
 {
     QString shortText = ui->shorttxt_line->text();
     QString fullText = ui->fulltxt_line->text();
-    emit ready_to_save(shortText , fullText);
+    emit ready_to_save(shortText , fullText , this);
 }
 

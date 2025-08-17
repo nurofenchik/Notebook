@@ -18,7 +18,7 @@ public:
 
 
 signals:
-    void ready_to_save(QString shortText , QString fullText);
+    void ready_to_save(QString shortText , QString fullText , QWidget* add_window);
 private slots:
 
     void on_save_note_button_clicked();
