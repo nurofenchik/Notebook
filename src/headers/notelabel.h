@@ -11,7 +11,7 @@ private:
     QString full_text;
 
 public:
-    NoteLabel( const QString& short_text , const QString& self_full_text , QWidget* parent = nullptr );
+    NoteLabel( const QString& shortText , const QString& fullText , QWidget* parent = nullptr );
 };
 
 #endif // NOTELABEL_H
