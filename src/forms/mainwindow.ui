@@ -65,6 +65,9 @@
          <string notr="true">background-color: #292a3c;</string>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_2">
+         <property name="topMargin">
+          <number>20</number>
+         </property>
          <item>
           <widget class="QPushButton" name="new_note_button">
            <property name="minimumSize">
@@ -106,6 +109,31 @@ border: 2px solid #1e2134;</string>
            <property name="spacing">
             <number>0</number>
            </property>
+           <property name="topMargin">
+            <number>5</number>
+           </property>
+           <item>
+            <widget class="Line" name="line">
+             <property name="minimumSize">
+              <size>
+               <width>500</width>
+               <height>1</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>1</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color:#313244;</string>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Orientation::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
            <item>
             <spacer name="verticalSpacer">
              <property name="orientation">
@@ -191,7 +219,7 @@ border: 2px solid #1e2134;</string>
           </property>
           <property name="minimumSize">
            <size>
-            <width>100000</width>
+            <width>500</width>
             <height>1</height>
            </size>
           </property>
@@ -265,6 +293,34 @@ border: 2px solid #1e2134;</string>
            <enum>Qt::CursorMoveStyle::LogicalMoveStyle</enum>
           </property>
          </widget>
+        </widget>
+        <widget class="Line" name="line_2">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>10</y>
+           <width>1</width>
+           <height>16777215</height>
+          </rect>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>1</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>1</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color:#313244;</string>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Orientation::Vertical</enum>
+         </property>
         </widget>
        </widget>
       </item>
