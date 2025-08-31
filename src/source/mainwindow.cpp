@@ -26,7 +26,8 @@ MainWindow::~MainWindow()
 void MainWindow::add_note(const QString &shortText, const QString &fullText , QWidget* add_window) {
     auto *note = new NoteLabel(shortText, fullText, this);
     note->setStyleSheet("color: white; background-color: #3f4156; padding: 8px; border-radius: 8px;");
-    ui->notes_container->addWidget(note);
+    note->setFixedSize(100 , 50);
+    ui->notes_container->insertWidget(0, note, 0, Qt::AlignTop);
     add_window->close();
 }
 
