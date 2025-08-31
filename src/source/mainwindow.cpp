@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->notes_scroll_area->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->notes_scroll_area->setLayoutDirection(Qt::RightToLeft);
     ui->notes_scroll_area->verticalScrollBar()->setLayoutDirection(Qt::LeftToRight);
+    ui->notes_container->addStretch();
 }
 
 MainWindow::~MainWindow()
@@ -27,7 +28,8 @@ void MainWindow::add_note(const QString &shortText, const QString &fullText , QW
     auto *note = new NoteLabel(shortText, fullText, this);
     note->setStyleSheet("color: white; background-color: #3f4156; padding: 8px; border-radius: 8px;");
     note->setFixedSize(100 , 50);
-    ui->notes_container->insertWidget(0, note, 0, Qt::AlignTop);
+    int index = ui->notes_container->count() - 1;
+    ui->notes_container->insertWidget(index, note, 0, Qt::AlignHCenter);
     add_window->close();
 }
 
