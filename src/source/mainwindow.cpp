@@ -26,7 +26,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::add_note(const QString &shortText, const QString &fullText , QWidget* add_window) {
     auto *note = new notebutton();
-    
+    note->SetNoteColor(notebutton::HIGH);
+    note->SetLabelText(shortText);
     // Добавляем заметку перед последним элементом (stretch)
     int index = ui->notes_container->count() - 1;
     ui->notes_container->insertWidget(index, note , 0 , Qt::AlignCenter);

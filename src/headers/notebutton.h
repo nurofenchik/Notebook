@@ -10,14 +10,21 @@ class notebutton;
 class notebutton : public QLabel
 {
     Q_OBJECT
+private:
+    Ui::notebutton *ui;
 
 public:
     explicit notebutton(QWidget *parent = nullptr);
     ~notebutton();
+    enum Priority
+    {
+        LOW,
+        MEDIUM,
+        HIGH
+    };
+    void SetLabelText( const QString& ShortText);
+    void SetNoteColor(  Priority priority);
 
-
-private:
-    Ui::notebutton *ui;
 };
 
 #endif // NOTEBUTTON_H
