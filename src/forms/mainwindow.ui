@@ -64,7 +64,7 @@
         <property name="styleSheet">
          <string notr="true">background-color: #292a3c;</string>
         </property>
-        <layout class="QVBoxLayout" name="verticalLayout_2">
+        <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,0">
          <property name="topMargin">
           <number>20</number>
          </property>
@@ -105,7 +105,7 @@ border: 2px solid #1e2134;</string>
           </widget>
          </item>
          <item>
-          <layout class="QVBoxLayout" name="verticalLayout">
+          <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,0">
            <property name="spacing">
             <number>0</number>
            </property>
@@ -153,9 +153,35 @@ border: 2px solid #1e2134;</string>
            <item>
             <widget class="QScrollArea" name="notes_scroll_area">
              <property name="styleSheet">
-              <string notr="true">QScrollBar:vertical {
-		background-color: #3f4156;
-}</string>
+              <string notr="true">/* ==== Вертикальный скроллбар ==== */
+QScrollBar:vertical {
+    border: none;
+    background: transparent;
+    width: 6px;                  /* толщина */
+    margin: 0px 0px 0px 0px;
+}
+
+QScrollBar::handle:vertical {
+    background: #888;            /* цвет ползунка */
+    min-height: 20px;            /* минимальная высота */
+    border-radius: 3px;          /* закруглённые края */
+}
+
+QScrollBar::handle:vertical:hover {
+    background: #555;            /* цвет при наведении */
+}
+
+QScrollBar::add-line:vertical,
+QScrollBar::sub-line:vertical {
+    height: 0px;                 /* убираем кнопки-стрелки */
+    subcontrol-origin: margin;
+}
+
+QScrollBar::add-page:vertical,
+QScrollBar::sub-page:vertical {
+    background: transparent;
+}
+</string>
              </property>
              <property name="verticalScrollBarPolicy">
               <enum>Qt::ScrollBarPolicy::ScrollBarAsNeeded</enum>
@@ -176,8 +202,15 @@ border: 2px solid #1e2134;</string>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_3">
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
                <item>
-                <layout class="QVBoxLayout" name="notes_container"/>
+                <layout class="QVBoxLayout" name="notes_container">
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                </layout>
                </item>
               </layout>
              </widget>

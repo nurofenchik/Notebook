@@ -2,7 +2,6 @@
 #define ADDNOTE_H
 
 #include <QDialog>
-#include "notelabel.h"
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class addnote;

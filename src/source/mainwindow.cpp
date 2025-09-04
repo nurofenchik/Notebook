@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "notelabel.h"
 #include "addnote.h"
+#include "notebutton.h"
 #include <QMessageBox>
 #include <QScrollArea>
 #include <QScrollBar>
@@ -25,11 +25,12 @@ MainWindow::~MainWindow()
 
 
 void MainWindow::add_note(const QString &shortText, const QString &fullText , QWidget* add_window) {
-    auto *note = new NoteLabel(shortText, fullText, this);
-    note->setStyleSheet("color: white; background-color: #3f4156; padding: 8px; border-radius: 8px;");
-    note->setFixedSize(100 , 50);
+    auto *note = new notebutton();
+    
+    // Добавляем заметку перед последним элементом (stretch)
     int index = ui->notes_container->count() - 1;
-    ui->notes_container->insertWidget(index, note, 0, Qt::AlignHCenter);
+    ui->notes_container->insertWidget(index, note , 0 , Qt::AlignCenter);
+    
     add_window->close();
 }
 
@@ -40,4 +41,3 @@ void MainWindow::on_new_note_button_clicked()
     addnote_wnd->show();
     connect(addnote_wnd , &addnote::ready_to_save , this , &MainWindow::add_note );
 }
-
