@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QVBoxLayout>
+#include "notebutton.h"
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -15,11 +16,11 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = nullptr);
-    void add_note(const QString& short_txt , const QString& full_txt , QWidget* add_window);
     ~MainWindow();
 
 private slots:
     void on_new_note_button_clicked();
+    void add_note(const QString& short_txt , notebutton::Priority note_level , QWidget* add_window);
 
 private:
     Ui::MainWindow *ui;

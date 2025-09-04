@@ -2,6 +2,8 @@
 #define ADDNOTE_H
 
 #include <QDialog>
+#include <QButtonGroup>
+#include "notebutton.h"
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class addnote;
@@ -17,13 +19,14 @@ public:
 
 
 signals:
-    void ready_to_save(QString shortText , QString fullText , QWidget* add_window);
+    void ready_to_save(QString shortText , notebutton::Priority priority_level, QWidget* add_window);
 private slots:
 
     void on_save_note_button_clicked();
 
 private:
     Ui::addnote *ui;
+    QButtonGroup* group;
 };
 
 #endif // ADDNOTE_H

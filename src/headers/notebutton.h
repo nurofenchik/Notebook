@@ -18,9 +18,9 @@ public:
     ~notebutton();
     enum Priority
     {
-        LOW,
-        MEDIUM,
-        HIGH
+        LOW = 1,
+        MEDIUM = 2,
+        HIGH = 3
     };
     void SetLabelText( const QString& ShortText);
     void SetNoteColor(  Priority priority);
