@@ -7,6 +7,7 @@ addnote::addnote(QWidget *parent)
     , ui(new Ui::addnote)
 {
     ui->setupUi(this);
+    this->setWindowTitle("NOTE INFO");
     group = new QButtonGroup(this);
     group->addButton(ui->low_button, 1);  // id = 1
     group->addButton(ui->med_button, 2);  // id = 2

@@ -1,14 +1,14 @@
 #include "notebutton.h"
 #include "ui_notebutton.h"
-
+#include "mainwindow.h"
 notebutton::notebutton(QWidget *parent)
-    : QLabel(parent)
+    : QPushButton(parent)
     , ui(new Ui::notebutton)
     , creationDate(QDateTime::currentDateTime())
 {
     ui->setupUi(this);
     this->setFixedSize(125, 50);
-    
+
     ui->date_label->setText(creationDate.toString("dd.MM.yyyy"));
 }
 
@@ -50,3 +50,9 @@ QDateTime notebutton::GetCreationDate() const
 {
     return creationDate;
 }
+
+void notebutton::on_notebutton_clicked()
+{
+    emit set_global_info(ui->note_text_label->text());
+}
+

@@ -31,7 +31,7 @@ void MainWindow::add_note(const QString &shortText , notebutton::Priority note_l
     // Добавляем заметку перед последним элементом (stretch)
     int index = ui->notes_container->count() - 1;
     ui->notes_container->insertWidget(index, note , 0 , Qt::AlignCenter);
-    
+    connect(  note , &notebutton::set_global_info , this , &MainWindow::SetInfo);
     add_window->close();
 }
 
@@ -43,9 +43,13 @@ void MainWindow::on_new_note_button_clicked()
     connect(addnote_wnd , &addnote::ready_to_save , this , &MainWindow::add_note );
 }
 
+void MainWindow::SetInfo(const QString& ShortText)
+{
+    ui->note_label->setText(ShortText);
+}
+
 
 /*TODO
- * сделать дату создания в маленькой июшке
  * сделать поле вывода основной инфы по заметке
  * сделать кнопки удаления заметки
  * сделать поле редактирования заметки

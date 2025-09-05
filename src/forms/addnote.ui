@@ -141,7 +141,7 @@
 }</string>
      </property>
      <property name="title">
-      <string>Note info</string>
+      <string/>
      </property>
      <layout class="QGridLayout" name="gridLayout">
       <item row="1" column="3">
