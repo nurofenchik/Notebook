@@ -2,6 +2,7 @@
 #define NOTEBUTTON_H
 
 #include <QLabel>
+#include <QDateTime>
 
 namespace Ui {
 class notebutton;
@@ -12,6 +13,7 @@ class notebutton : public QLabel
     Q_OBJECT
 private:
     Ui::notebutton *ui;
+    QDateTime creationDate;
 
 public:
     explicit notebutton(QWidget *parent = nullptr);
@@ -22,8 +24,10 @@ public:
         MEDIUM = 2,
         HIGH = 3
     };
-    void SetLabelText( const QString& ShortText);
-    void SetNoteColor(  Priority priority);
+    void SetLabelText(const QString& ShortText);
+    void SetNoteColor(Priority priority);
+    void SetCreationDate(const QDateTime& date);
+    QDateTime GetCreationDate() const;
 
 };
 

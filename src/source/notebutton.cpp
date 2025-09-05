@@ -4,9 +4,12 @@
 notebutton::notebutton(QWidget *parent)
     : QLabel(parent)
     , ui(new Ui::notebutton)
+    , creationDate(QDateTime::currentDateTime())
 {
     ui->setupUi(this);
     this->setFixedSize(125, 50);
+    
+    ui->date_label->setText(creationDate.toString("dd.MM.yyyy"));
 }
 
 notebutton::~notebutton()
@@ -16,7 +19,12 @@ notebutton::~notebutton()
 
 void notebutton::SetLabelText(const QString &ShortText)
 {
-    ui->note_label->setText(ShortText);
+    QString displayText = ShortText;
+    // Ограничиваем текст для отображения в маленьком виджете
+    if (displayText.length() > 20) {
+        displayText = displayText.left(17) + "...";
+    }
+    ui->note_text_label->setText(displayText);
 }
 
 void notebutton::SetNoteColor(Priority priority)
@@ -24,10 +32,21 @@ void notebutton::SetNoteColor(Priority priority)
     QString color;
 
     switch(priority) {
-    case LOW:    color = "#4caf50"; break;  // зелёный
-    case MEDIUM: color = "#ffb74d"; break;  // оранжевый
-    case HIGH:   color = "#e53935"; break;  // красный
-    default:     color = "#ffffff"; break;  // белый на всякий случай
+    case LOW:    color = "#3700ff"; break;
+    case MEDIUM: color = "#6142cf"; break;
+    case HIGH:   color = "#1d0e52"; break;
+    default:     color = "#333333"; break;
     }
-    this->setStyleSheet(QString("color: white;background-color: %1; padding: 8px;border-radius: 12px;").arg(color));
+    this->setStyleSheet(QString("QWidget { color: white; background-color: %1; padding: 2px; border-radius: 12px; }").arg(color));
+}
+
+void notebutton::SetCreationDate(const QDateTime &date)
+{
+    creationDate = date;
+    ui->date_label->setText(creationDate.toString("dd.MM.yyyy"));
+}
+
+QDateTime notebutton::GetCreationDate() const
+{
+    return creationDate;
 }

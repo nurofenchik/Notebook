@@ -42,3 +42,12 @@ void MainWindow::on_new_note_button_clicked()
     addnote_wnd->show();
     connect(addnote_wnd , &addnote::ready_to_save , this , &MainWindow::add_note );
 }
+
+
+/*TODO
+ * сделать дату создания в маленькой июшке
+ * сделать поле вывода основной инфы по заметке
+ * сделать кнопки удаления заметки
+ * сделать поле редактирования заметки
+ *
+*/
