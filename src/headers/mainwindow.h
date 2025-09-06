@@ -16,7 +16,7 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = nullptr);
-    void SetInfo(const QString& ShortText);
+    void SetInfo(const QString& ShortText, notebutton* note);
     ~MainWindow();
 
 private slots:

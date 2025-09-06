@@ -8,7 +8,9 @@ notebutton::notebutton(QWidget *parent)
 {
     ui->setupUi(this);
     this->setFixedSize(125, 50);
-
+    connect(this, &QPushButton::clicked, this, [this]() {
+        emit noteSelected(fullText);
+    });
     ui->date_label->setText(creationDate.toString("dd.MM.yyyy"));
 }
 
@@ -53,7 +55,7 @@ QDateTime notebutton::GetCreationDate() const
 
 void notebutton::on_notebutton_clicked()
 {
-    emit set_global_info(ui->note_text_label->text());
+    emit set_global_info(ui->note_text_label->text() , this);
 }
 
 

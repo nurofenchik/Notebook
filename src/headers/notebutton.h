@@ -15,7 +15,7 @@ class notebutton : public QPushButton
 private:
     Ui::notebutton *ui;
     QDateTime creationDate;
-
+    QString fullText;
 public:
     explicit notebutton(QWidget *parent = nullptr);
     ~notebutton();
@@ -28,10 +28,11 @@ public:
     void SetLabelText(const QString& ShortText);
     void SetNoteColor(Priority priority);
     void SetCreationDate(const QDateTime& date);
+    QString getNoteText() const { return fullText; }
     QDateTime GetCreationDate() const;
 signals:
-    void set_global_info(const QString& short_text);
-
+    void set_global_info(const QString& short_text, notebutton* note);
+    void noteSelected(const QString &text);
 private slots:
     void on_notebutton_clicked();
 };

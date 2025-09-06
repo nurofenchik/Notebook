@@ -18,6 +18,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->notes_container->addStretch();
     ui->note_label->hide();
     ui->del_button->hide();
+    ui->note_edito->hide();
 }
 
 MainWindow::~MainWindow()
@@ -34,6 +35,9 @@ void MainWindow::add_note(const QString &shortText , notebutton::Priority note_l
     int index = ui->notes_container->count() - 1;
     ui->notes_container->insertWidget(index, note , 0 , Qt::AlignCenter);
     connect(note, &notebutton::set_global_info, this, &MainWindow::SetInfo);
+    connect(note, &notebutton::noteSelected, this, [this](const QString &text) {
+        ui->note_edito->setPlainText(text); // выводим в QTextEdit
+    });
     add_window->close();
 }
 
@@ -45,17 +49,24 @@ void MainWindow::on_new_note_button_clicked()
     connect(addnote_wnd , &addnote::ready_to_save , this , &MainWindow::add_note );
 }
 
-void MainWindow::SetInfo(const QString& ShortText)
+void MainWindow::SetInfo(const QString& ShortText , notebutton* note)
 {
     ui->note_label->setText(ShortText);
     ui->note_label->show();
     ui->del_button->show();
+    ui->note_edito->show();
+    if( note->getNoteText().length() > 0)
+    {
+        ui->note_edito->setPlainText( note->getNoteText());
+    }
+    else
+    {
+        ui->note_edito->setPlaceholderText("Note...");
+    }
     currentNote = qobject_cast<notebutton*>(sender());
 }
 
 /*TODO
- * сделать поле вывода основной инфы по заметке
- * сделать кнопки удаления заметки
  * сделать поле редактирования заметки
  *
 */
@@ -71,6 +82,8 @@ void MainWindow::delete_note(notebutton* note)
     // Скрываем панель с инфой, если она была открыта
     ui->note_label->hide();
     ui->del_button->hide();
+    ui->note_edito->hide();
+    delete note;
 }
 
 
