@@ -22,8 +22,12 @@ public:
 private slots:
     void on_new_note_button_clicked();
     void add_note(const QString& short_txt , notebutton::Priority note_level , QWidget* add_window);
+    void delete_note(notebutton* note);
+
+    void on_del_button_clicked();
 
 private:
     Ui::MainWindow *ui;
+    notebutton* currentNote = nullptr;
 };
 #endif // MAINWINDOW_H

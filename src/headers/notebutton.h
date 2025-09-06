@@ -30,7 +30,7 @@ public:
     void SetCreationDate(const QDateTime& date);
     QDateTime GetCreationDate() const;
 signals:
-    void set_global_info(const QString&  short_text);
+    void set_global_info(const QString& short_text);
 
 private slots:
     void on_notebutton_clicked();

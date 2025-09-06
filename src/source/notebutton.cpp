@@ -56,3 +56,5 @@ void notebutton::on_notebutton_clicked()
     emit set_global_info(ui->note_text_label->text());
 }
 
+
+
