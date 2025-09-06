@@ -21,10 +21,10 @@ public:
 
 private slots:
     void on_new_note_button_clicked();
-    void add_note(const QString& short_txt , notebutton::Priority note_level , QWidget* add_window);
+    void add_note(const QString& short_txt, const QString& fullText, notebutton::Priority note_level, QWidget* add_window);
     void delete_note(notebutton* note);
-
     void on_del_button_clicked();
+    void on_note_edito_textChanged(); // Для сохранения изменений в реальном времени
 
 private:
     Ui::MainWindow *ui;

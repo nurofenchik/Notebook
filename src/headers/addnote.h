@@ -19,7 +19,7 @@ public:
 
 
 signals:
-    void ready_to_save(QString shortText , notebutton::Priority priority_level, QWidget* add_window);
+    void ready_to_save(QString shortText, QString fullText, notebutton::Priority priority_level, QWidget* add_window);
 private slots:
 
     void on_save_note_button_clicked();
@@ -27,6 +27,7 @@ private slots:
 private:
     Ui::addnote *ui;
     QButtonGroup* group;
+    QString fulltext;
 };
 
 #endif // ADDNOTE_H

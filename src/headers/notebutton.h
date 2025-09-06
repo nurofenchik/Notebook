@@ -26,12 +26,13 @@ public:
         HIGH = 3
     };
     void SetLabelText(const QString& ShortText);
+    void SetFullText(const QString& FullText);
     void SetNoteColor(Priority priority);
     void SetCreationDate(const QDateTime& date);
     QString getNoteText() const { return fullText; }
     QDateTime GetCreationDate() const;
 signals:
-    void set_global_info(const QString& short_text, notebutton* note);
+    void set_global_info(const QString& short_text,const QString& full_txt , notebutton* note);
     void noteSelected(const QString &text);
 private slots:
     void on_notebutton_clicked();

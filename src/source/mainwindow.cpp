@@ -19,6 +19,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->note_label->hide();
     ui->del_button->hide();
     ui->note_edito->hide();
+    
+    // Подключаем сигнал изменения текста в редакторе
+    connect(ui->note_edito, &QTextEdit::textChanged, this, &MainWindow::on_note_edito_textChanged);
 }
 
 MainWindow::~MainWindow()
@@ -27,17 +30,20 @@ MainWindow::~MainWindow()
 }
 
 
-void MainWindow::add_note(const QString &shortText , notebutton::Priority note_level  ,QWidget* add_window) {
+void MainWindow::add_note(const QString &shortText, const QString& fullText, notebutton::Priority note_level, QWidget* add_window) {
     auto *note = new notebutton();
     note->SetNoteColor(note_level);
     note->SetLabelText(shortText);
-    // Добавляем заметку перед последним элементом (stretch)
+    note->SetFullText(fullText);
+    
     int index = ui->notes_container->count() - 1;
-    ui->notes_container->insertWidget(index, note , 0 , Qt::AlignCenter);
-    connect(note, &notebutton::set_global_info, this, &MainWindow::SetInfo);
-    connect(note, &notebutton::noteSelected, this, [this](const QString &text) {
-        ui->note_edito->setPlainText(text); // выводим в QTextEdit
+    ui->notes_container->insertWidget(index, note, 0, Qt::AlignCenter);
+    
+    // Подключаем сигнал для отображения информации о заметке
+    connect(note, &notebutton::set_global_info, this, [this, note](const QString &shortText) {
+        SetInfo(shortText, note);
     });
+
     add_window->close();
 }
 
@@ -49,21 +55,23 @@ void MainWindow::on_new_note_button_clicked()
     connect(addnote_wnd , &addnote::ready_to_save , this , &MainWindow::add_note );
 }
 
-void MainWindow::SetInfo(const QString& ShortText , notebutton* note)
+void MainWindow::SetInfo(const QString& ShortText, notebutton* note)
 {
     ui->note_label->setText(ShortText);
     ui->note_label->show();
     ui->del_button->show();
     ui->note_edito->show();
-    if( note->getNoteText().length() > 0)
-    {
-        ui->note_edito->setPlainText( note->getNoteText());
+    
+    // Устанавливаем текущую заметку
+    currentNote = note;
+    
+    // Загружаем полный текст заметки в редактор
+    if (!note->getNoteText().isEmpty()) {
+        ui->note_edito->setPlainText(note->getNoteText());
+    } else {
+        ui->note_edito->setPlainText("");
+        ui->note_edito->setPlaceholderText("Введите полный текст заметки...");
     }
-    else
-    {
-        ui->note_edito->setPlaceholderText("Note...");
-    }
-    currentNote = qobject_cast<notebutton*>(sender());
 }
 
 /*TODO
@@ -93,6 +101,14 @@ void MainWindow::on_del_button_clicked()
     {
         delete_note(currentNote);
         currentNote = nullptr;
+    }
+}
+
+void MainWindow::on_note_edito_textChanged()
+{
+    // Сохраняем изменения в текущую заметку
+    if (currentNote) {
+        currentNote->SetFullText(ui->note_edito->toPlainText());
     }
 }
 

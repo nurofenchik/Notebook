@@ -29,6 +29,11 @@ void notebutton::SetLabelText(const QString &ShortText)
     ui->note_text_label->setText(displayText);
 }
 
+void notebutton::SetFullText(const QString &FullText)
+{
+    fullText = FullText;
+}
+
 void notebutton::SetNoteColor(Priority priority)
 {
     QString color;
@@ -55,7 +60,7 @@ QDateTime notebutton::GetCreationDate() const
 
 void notebutton::on_notebutton_clicked()
 {
-    emit set_global_info(ui->note_text_label->text() , this);
+    emit set_global_info(ui->note_text_label->text() , fullText , this);
 }
 
 
