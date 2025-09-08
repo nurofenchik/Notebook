@@ -4,7 +4,7 @@
 #include <QPushButton>
 #include <QDateTime>
 #include <QColor>
-
+#include <QTextDocument>
 namespace Ui {
 class notebutton;
 }
@@ -15,7 +15,7 @@ class notebutton : public QPushButton
 private:
     Ui::notebutton *ui;
     QDateTime creationDate;
-    QString fullText;
+    QTextDocument* document;
 public:
     explicit notebutton(QWidget *parent = nullptr);
     ~notebutton();
@@ -26,14 +26,12 @@ public:
         HIGH = 3
     };
     void SetLabelText(const QString& ShortText);
-    void SetFullText(const QString& FullText);
     void SetNoteColor(Priority priority);
     void SetCreationDate(const QDateTime& date);
-    QString getNoteText() const { return fullText; }
     QDateTime GetCreationDate() const;
+    QTextDocument* getdocument() const {return document;}
 signals:
-    void set_global_info(const QString& short_text,const QString& full_txt , notebutton* note);
-    void noteSelected(const QString &text);
+    void set_global_info(const QString& short_text , notebutton* note);
 private slots:
     void on_notebutton_clicked();
 };

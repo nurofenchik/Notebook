@@ -5,17 +5,16 @@ notebutton::notebutton(QWidget *parent)
     : QPushButton(parent)
     , ui(new Ui::notebutton)
     , creationDate(QDateTime::currentDateTime())
+    , document(new QTextDocument(this))
 {
     ui->setupUi(this);
     this->setFixedSize(125, 50);
-    connect(this, &QPushButton::clicked, this, [this]() {
-        emit noteSelected(fullText);
-    });
     ui->date_label->setText(creationDate.toString("dd.MM.yyyy"));
 }
 
 notebutton::~notebutton()
 {
+    delete document;
     delete ui;
 }
 
@@ -29,10 +28,6 @@ void notebutton::SetLabelText(const QString &ShortText)
     ui->note_text_label->setText(displayText);
 }
 
-void notebutton::SetFullText(const QString &FullText)
-{
-    fullText = FullText;
-}
 
 void notebutton::SetNoteColor(Priority priority)
 {
@@ -60,7 +55,7 @@ QDateTime notebutton::GetCreationDate() const
 
 void notebutton::on_notebutton_clicked()
 {
-    emit set_global_info(ui->note_text_label->text() , fullText , this);
+    emit set_global_info(ui->note_text_label->text() , this);
 }
 
 

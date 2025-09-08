@@ -446,7 +446,9 @@ border: 2px solid #3f4156;</string>
           </rect>
          </property>
          <property name="styleSheet">
-          <string notr="true">background-color: #292a3c;</string>
+          <string notr="true">background-color: #1e2132;
+border-radius: 13px;                     /* &lt;----  20px  */ 
+border: 2px solid #3f4156;</string>
          </property>
         </widget>
        </widget>

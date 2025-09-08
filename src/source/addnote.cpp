@@ -26,6 +26,6 @@ void addnote::on_save_note_button_clicked()
     QString shortText = ui->shorttxt_line->text();
     int id = group->checkedId();
     notebutton::Priority note_level = static_cast<notebutton::Priority>(id);
-    emit ready_to_save(shortText, fulltext ,  note_level, this);
+    emit ready_to_save(shortText ,  note_level, this);
 }
 
