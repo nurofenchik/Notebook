@@ -1,61 +1,100 @@
 #include "notebutton.h"
 #include "ui_notebutton.h"
-#include "mainwindow.h"
-notebutton::notebutton(QWidget *parent)
+#include <algorithm>
+
+NoteButton::NoteButton(QWidget *parent)
     : QPushButton(parent)
-    , ui(new Ui::notebutton)
-    , creationDate(QDateTime::currentDateTime())
-    , document(new QTextDocument(this))
+    , m_ui(new Ui::notebutton)
+    , m_creationDate(QDateTime::currentDateTime())
+    , m_document(new QTextDocument(this))
 {
-    ui->setupUi(this);
-    this->setFixedSize(125, 50);
-    ui->date_label->setText(creationDate.toString("dd.MM.yyyy"));
+    m_ui->setupUi(this);
+    
+    // Set fixed size for consistent appearance
+    setFixedSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+    
+    // Display creation date
+    m_ui->date_label->setText(m_creationDate.toString("dd.MM.yyyy"));
+    
+    // Connect click signal
+    connect(this, &QPushButton::clicked, this, &NoteButton::onButtonClicked);
 }
 
-notebutton::~notebutton()
+NoteButton::~NoteButton()
 {
-    delete document;
-    delete ui;
+    delete m_ui;
+    // m_document is deleted automatically as it's a child of this widget
 }
 
-void notebutton::SetLabelText(const QString &ShortText)
+void NoteButton::setLabelText(const QString& shortText)
 {
-    QString displayText = ShortText;
-    // Ограничиваем текст для отображения в маленьком виджете
-    if (displayText.length() > 20) {
-        displayText = displayText.left(17) + "...";
+    if (shortText.isEmpty()) {
+        m_ui->note_text_label->setText(tr("Empty note"));
+        return;
     }
-    ui->note_text_label->setText(displayText);
-}
-
-
-void notebutton::SetNoteColor(Priority priority)
-{
-    QString color;
-
-    switch(priority) {
-    case LOW:    color = "#3700ff"; break;
-    case MEDIUM: color = "#6142cf"; break;
-    case HIGH:   color = "#1d0e52"; break;
-    default:     color = "#333333"; break;
+    
+    QString displayText = shortText;
+    
+    // Truncate text if it's too long for display
+    if (displayText.length() > MAX_DISPLAY_LENGTH) {
+        displayText = displayText.left(TRUNCATE_LENGTH) + "...";
     }
-    this->setStyleSheet(QString("QWidget { color: white; background-color: %1; padding: 2px; border-radius: 12px; }").arg(color));
+    
+    m_ui->note_text_label->setText(displayText);
 }
 
-void notebutton::SetCreationDate(const QDateTime &date)
+void NoteButton::setNoteColor(Priority priority)
 {
-    creationDate = date;
-    ui->date_label->setText(creationDate.toString("dd.MM.yyyy"));
+    const QString color = getColorForPriority(priority);
+    const QString styleSheet = QString(
+        "QWidget { "
+        "color: white; "
+        "background-color: %1; "
+        "padding: 2px; "
+        "border-radius: 12px; "
+        "}"
+    ).arg(color);
+    
+    setStyleSheet(styleSheet);
 }
 
-QDateTime notebutton::GetCreationDate() const
+void NoteButton::setCreationDate(const QDateTime& date)
 {
-    return creationDate;
+    if (!date.isValid()) {
+        qWarning("NoteButton::setCreationDate: Invalid date provided");
+        return;
+    }
+    
+    m_creationDate = date;
+    m_ui->date_label->setText(m_creationDate.toString("dd.MM.yyyy"));
 }
 
-void notebutton::on_notebutton_clicked()
+QDateTime NoteButton::getCreationDate() const
 {
-    emit set_global_info(ui->note_text_label->text() , this);
+    return m_creationDate;
+}
+
+QTextDocument* NoteButton::getDocument() const
+{
+    return m_document;
+}
+
+void NoteButton::onButtonClicked()
+{
+    const QString shortText = m_ui->note_text_label->text();
+    emit globalInfoRequested(shortText, this);
+}
+
+QString NoteButton::getColorForPriority(Priority priority) const
+{
+    switch (priority) {
+        case Priority::Low:    return "#3700ff";  // Blue
+        case Priority::Medium: return "#6142cf";  // Purple  
+        case Priority::High:   return "#1d0e52";  // Dark purple
+        default:
+            qWarning("NoteButton::getColorForPriority: Unknown priority level");
+            return "#333333";  // Default gray
+    }
 }
 
 
